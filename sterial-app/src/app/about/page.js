@@ -1,27 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Home = () => {
+const About = () => {
   return (
-    <main>
+    <>
       <div className="hero overlay">
         <div className="img-bg rellax">
-          <Image src="/images/hero_1.jpg" alt="Image" className="img-fluid" width={1200} height={800} />
+          <Image src="/images/hero_1.jpg" alt="Hero Image" layout="fill" objectFit="cover" />
         </div>
 
         <div className="container">
           <div className="row align-items-center justify-content-start">
             <div className="col-lg-5">
-              <h1 className="heading" data-aos="fade-up">It's a Big World Out There, Go Explore</h1>
+              <h1 className="heading" data-aos="fade-up">About Us</h1>
               <p className="mb-5" data-aos="fade-up">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 
               <div data-aos="fade-up">
-                <Link href="https://www.youtube.com/watch?v=5n-e6lOhVq0" className="play-button align-items-center d-flex glightbox3">
+                <a href="https://www.youtube.com/watch?v=5n-e6lOhVq0" className="play-button align-items-center d-flex glightbox3">
                   <span className="icon-button me-3">
                     <span className="icon-play"></span>
                   </span>
                   <span className="caption">Watch Video</span>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -34,10 +34,10 @@ const Home = () => {
             <div className="col-lg-6 order-lg-2 mb-5 mb-lg-0">
               <div className="image-stack mb-5 mb-lg-0">
                 <div className="image-stack__item image-stack__item--bottom" data-aos="fade-up">
-                  <Image src="/images/img_v_1.jpg" alt="Image" className="img-fluid rellax" width={600} height={400} />
+                  <Image src="/images/img_v_1.jpg" alt="Image" width={500} height={300} />
                 </div>
                 <div className="image-stack__item image-stack__item--top" data-aos="fade-up" data-aos-delay="100" data-rellax-percentage="0.5">
-                  <Image src="/images/img_v_2.jpg" alt="Image" className="img-fluid" width={600} height={400} />
+                  <Image src="/images/img_v_2.jpg" alt="Image" width={500} height={300} />
                 </div>
               </div>
             </div>
@@ -55,9 +55,11 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Add more sections here, converting them similarly */}
+      {/* Add the rest of the sections here, following the same pattern */}
+      {/* ... */}
 
-    </main>
+    </>
   );
 }
-export default Home
+
+export default About
