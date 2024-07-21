@@ -1,7 +1,7 @@
+"use client";
 import { useEffect } from 'react';
 
-const navbar = () => {
-
+const Navbar = () => {
   useEffect(() => {
     const siteMenuClone = () => {
       const jsCloneNavs = document.querySelectorAll('.js-clone-nav');
@@ -81,4 +81,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;
