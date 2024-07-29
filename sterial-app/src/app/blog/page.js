@@ -1,12 +1,35 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Blog =() => {
+async function getBlogPosts() {
+  
+  return [
+    {
+      id: 1,
+      slug: 'why-staying-at-home-is-important',
+      title: 'Why Staying at Home is Important',
+      excerpt: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
+      image: '/images/img_2.jpg'
+    },
+    {
+      id: 2,
+      slug: 'another-blog-post',
+      title: 'Another Blog Post',
+      excerpt: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
+      image: '/images/img_3.jpg'
+    },
+    // Add more blog posts as needed
+  ];
+}
+
+export default async function Blog() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <>
       <div className="hero overlay">
         <div className="img-bg rellax">
-          <Image src="/images/hero_3.jpg" alt="Image" layout="fill" objectFit="cover" />
+          <Image src="/images/hero_2.jpg" alt="Image" layout="fill" objectFit="cover" />
         </div>
         <div className="container">
           <div className="row align-items-center justify-content-start">
@@ -21,43 +44,19 @@ const Blog =() => {
       <div className="section">
         <div className="container">
           <div className="row mb-5">
-            <div className="col-lg-6">
-              <div className="post-entry">
-                <Image src="/images/img_7.jpg" alt="Image" width={500} height={350} className="img-fluid mb-4" />
-                <span className="date">Apr. 14th, 2022</span>
-                <h2><Link href="/single">Why Staying at Home is Important</Link></h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                <p><Link href="/single" className="btn btn-sm btn-outline-primary">Read More</Link></p>
+            {blogPosts.map((post) => (
+              <div className="col-lg-6" key={post.id}>
+                <div className="post-entry">
+                  <Image src={post.image} alt={post.title} width={500} height={350} className="img-fluid mb-4" />
+                  <h2><Link href={`/blog/${post.slug}`}>{post.title}</Link></h2>
+                  <p>{post.excerpt}</p>
+                  <p><Link href={`/blog/${post.slug}`} className="btn btn-sm btn-outline-primarys">Read More</Link></p>
+                </div>
               </div>
-            </div>
-
-            <div className="col-lg-6">
-              <div className="post-entry">
-                <Image src="/images/img_3.jpg" alt="Image" width={500} height={350} className="img-fluid mb-4" />
-                <span className="date">Apr. 14th, 2022</span>
-                <h2><Link href="/single">Why Staying at Home is Important</Link></h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                <p><Link href="/single" className="btn btn-sm btn-outline-primary">Read More</Link></p>
-              </div>
-            </div>
-
-            {/* Add more blog post entries here */}
-          </div>
-
-          <div className="row">
-            <div className="col-lg-12 text-center">
-              <div className="custom-pagination">
-                <span>1</span>
-                <Link href="#" className="active">2</Link>
-                <Link href="#">3</Link>
-                <Link href="#">4</Link>
-                <Link href="#">5</Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
 }
-export default Blog

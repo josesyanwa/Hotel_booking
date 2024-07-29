@@ -1,83 +1,54 @@
-"use client";
-import { useEffect } from 'react';
+import React from "react";
+import Link from "next/link"
 
 const Navbar = () => {
-  useEffect(() => {
-    const siteMenuClone = () => {
-      const jsCloneNavs = document.querySelectorAll('.js-clone-nav');
-      const siteMobileMenuBody = document.querySelector('.site-mobile-menu-body');
-
-      jsCloneNavs.forEach(nav => {
-        const navCloned = nav.cloneNode(true);
-        navCloned.setAttribute('class', 'site-nav-wrap');
-        siteMobileMenuBody.appendChild(navCloned);
-      });
-
-      setTimeout(() => {
-        const hasChildrens = document.querySelector('.site-mobile-menu').querySelectorAll('.has-children');
-
-        let counter = 0;
-        hasChildrens.forEach(hasChild => {
-          const refEl = hasChild.querySelector('a');
-          const newElSpan = document.createElement('span');
-          newElSpan.setAttribute('class', 'arrow-collapse collapsed');
-          hasChild.insertBefore(newElSpan, refEl);
-
-          const arrowCollapse = hasChild.querySelector('.arrow-collapse');
-          arrowCollapse.setAttribute('data-toggle', 'collapse');
-          arrowCollapse.setAttribute('data-target', '#collapseItem' + counter);
-
-          const dropdown = hasChild.querySelector('.dropdown');
-          dropdown.setAttribute('class', 'collapse');
-          dropdown.setAttribute('id', 'collapseItem' + counter);
-
-          counter++;
-        });
-      }, 1000);
-
-      const menuToggle = document.querySelectorAll('.js-menu-toggle');
-      menuToggle.forEach(mtoggle => {
-        mtoggle.addEventListener('click', (e) => {
-          if (document.body.classList.contains('offcanvas-menu')) {
-            document.body.classList.remove('offcanvas-menu');
-            mtoggle.classList.remove('active');
-          } else {
-            document.body.classList.add('offcanvas-menu');
-            mtoggle.classList.add('active');
-          }
-        });
-      });
-
-      const specifiedElement = document.querySelector('.site-mobile-menu');
-      document.addEventListener('click', (event) => {
-        const isClickInside = specifiedElement.contains(event.target);
-        let mt = false;
-        menuToggle.forEach(mtoggle => {
-          if (mtoggle.contains(event.target)) mt = true;
-        });
-
-        if (!isClickInside && !mt) {
-          if (document.body.classList.contains('offcanvas-menu')) {
-            document.body.classList.remove('offcanvas-menu');
-            menuToggle.forEach(mtoggle => mtoggle.classList.remove('active'));
-          }
-        }
-      });
-    };
-
-    siteMenuClone();
-  }, []);
-
   return (
-    <div>
-      <div className="site-mobile-menu">
-        <div className="site-mobile-menu-body"></div>
+    <nav className="site-nav mt-3">
+      <div className="container">
+        <div className="site-navigation">
+          <div className="row">
+            <div className="col-6 col-lg-3">
+              <a href="index.html" className="logo m-0 float-start">Sterial</a>
+            </div>
+            <div className="col-lg-6 d-none d-lg-inline-block text-center nav-center-wrap">
+              <ul className="js-clone-nav text-center site-menu p-0 m-0">
+                <li className="active"><Link href= "/">Home</Link></li>
+                <li className="active"><Link href= "/about">About us</Link></li>
+
+                {/* <li className="has-children">
+                <Link href= "#">Dropdown</Link>
+                  <ul className="dropdown">
+                    <li><a href="#">Menu One</a></li>
+                    <li className="has-children">
+                      <a href="#">Menu Two</a>
+                      <ul className="dropdown">
+                        <li><a href="#">Sub Menu One</a></li>
+                        <li><a href="#">Sub Menu Two</a></li>
+                        <li><a href="#">Sub Menu Three</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Menu Three</a></li>
+                  </ul>
+                </li> */}
+                
+                <li className="active"><Link href= "/services">Services</Link></li>
+                
+                <li className="active"><Link href= "/blog">Blog</Link></li>
+              </ul>
+            </div>
+            <div className="col-6 col-lg-3 text-lg-end">
+              <ul className="js-clone-nav d-none d-lg-inline-block text-end site-menu">
+                <li className="cta-button"><Link href="/contact">Contact Us</Link></li>
+              </ul>
+
+              <a href="#" className="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
+                <span></span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <nav className="js-clone-nav">
-        {/* Your navigation structure here */}
-      </nav>
-      <button className="js-menu-toggle">Toggle Menu</button>
-    </div>
+    </nav>
   );
 };
 
